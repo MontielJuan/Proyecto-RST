@@ -1,8 +1,4 @@
-import Formm from './components/Formm'
-import "bootstrap/dist/css/bootstrap.min.css";
-/*
 import React, { Component } from 'react';
-
 import {
   Route,
   BrowserRouter as Router,
@@ -10,32 +6,99 @@ import {
   Redirect,
 } from "react-router-dom";
 import Home from './pages/Home';
-import Chat from './pages/Chat';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import { auth } from './services/firebase';*/
-//import { Coin } from 'react-bootstrap-icons';
-//<Coin size={32} className="d-inline-block align-top"/> 'va en a'
+import { auth } from './firebase';
+import Data from './pages/Data';
 
-function App() {
+
+function PrivateRoute({ component: Component, authenticated, ...rest}) {
   return (
-    <>     
-        <nav className="navbar navbar-expand-sm navbar-light" Style="background-color: #40E0D0;">
-          <a className="p-2 navbar-brand" href="/" >
-                    
-            Monitoreo de dispositivos
-          </a>            
-        </nav>
-        <div className="container mt-3">
-          <div className="row justify-content-center">
-            <div className="col-md-6"> 
-            <h2>Dispositivos</h2>
-          </div>          
-        </div>
-          <Formm />
-        </div>
-    </>
+    <Route
+      {...rest}
+      render={(props) => 
+        authenticated === true ? (   
+          <Component {...props} />
+        ) : (
+          <Redirect 
+            to={{ pathname: "/login", state: { from: props.location }}} 
+          />
+        )
+      }
+    />
   );
+}
+
+function PublicRoute({ component: Component, authenticated, ...rest}) {
+  return (
+    <Route
+    {...rest}
+    render={(props) => 
+      authenticated === false ? (
+        <Component {...props} />
+      ) : (
+        <Redirect to='/data' />
+        )
+    }
+    />
+    );
+}
+
+
+class App extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      authenticated: false,
+      loading: true
+    };
+  }
+
+  componentDidMount() {
+    auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({
+          authenticated: true,
+          loading: false
+        });
+      } else {
+        this.setState({
+          authenticated: false,
+          loading: false
+        });
+      }
+    });
+  }
+
+   render() {
+    return this.state.loading === true ? (
+      <div className="spinner-border text-success" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>
+    ) : (
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <PrivateRoute
+              path="/data"
+              authenticated={this.state.authenticated}
+              component={Data}
+            />
+            <PublicRoute
+              path="/signup"
+              authenticated={this.state.authenticated}
+              component={Signup}
+            />
+            <PublicRoute
+              path="/login"
+              authenticated={this.state.authenticated}
+              component={Login}
+            />
+          </Switch>
+        </Router>
+      );
+  }
 }
 
 export default App;
