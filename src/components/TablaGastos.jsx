@@ -32,6 +32,7 @@ class TablaGastos extends Component {
                                 const { value } = data;
                                 if (value === null || typeof value === "undefined") return null;                                
                                 const values = Object.values(value);
+                                console.log(values)
                                 return <ListaGastos items={values} />
                             }}
                         </FirebaseDatabaseNode>

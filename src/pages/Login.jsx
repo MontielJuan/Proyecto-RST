@@ -80,16 +80,13 @@ export default class Login extends Component {
                         <button className="btn btn-dark px-5" type="submit">Login</button>
                     </div>
 					<p>You can also log in with any of these services</p>
-          			<button className="btn mr-3 text-white" onClick={this.googleSignIn}>
+          			<button className="btn mr-3 text-black" onClick={this.googleSignIn}>
             			Sign in with Google
           			</button>
-					<button className="btn mr-3 text-white" type="button" onClick={this.githubSignIn}>
+					<button className="btn mr-3 text-black" type="button" onClick={this.githubSignIn}>
            	 			Sign in with GitHub
           			</button>
 					<hr />
-          			<p>
-						Don't have an account? <Link to="/signup">Sign up</Link>
-					</p>
 				</form>
 			</div>
 		);

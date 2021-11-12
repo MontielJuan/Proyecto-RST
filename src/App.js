@@ -6,10 +6,11 @@ import {
   Redirect,
 } from "react-router-dom";
 import Home from './pages/Home';
-import Signup from './pages/Signup';
 import Login from './pages/Login';
 import { auth } from './firebase';
 import Data from './pages/Data';
+
+import "../src/App.css"
 
 
 function PrivateRoute({ component: Component, authenticated, ...rest}) {
@@ -84,11 +85,6 @@ class App extends Component {
               path="/data"
               authenticated={this.state.authenticated}
               component={Data}
-            />
-            <PublicRoute
-              path="/signup"
-              authenticated={this.state.authenticated}
-              component={Signup}
             />
             <PublicRoute
               path="/login"
