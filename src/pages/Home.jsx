@@ -9,12 +9,10 @@ export default class HomePage extends Component {
           <div>
             <section className="container text-center py-5">
               <div >
-                <h1 className="display-4">Welcome to Chatty</h1>
-                <p className="lead">A great place to share your thoughts with friends</p>
+                <h1 className="display-4">Welcome</h1>
               </div>
               <div className="mt-4 ">
-                <Link className="btn btn-primary px-5 mr-3" to = "/signup">Create New Account</Link>
-                <Link className="btn px-5 text-white" to = "/login">Login to your Account</Link>
+                <Link className="btn btn-primary px-5 mr-3" to = "/login">Login to your Account</Link>
               </div>
             </section>
           </div>

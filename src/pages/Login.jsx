@@ -55,7 +55,7 @@ export default class Login extends Component {
 				className="mt-5 py-5 px-5"
 				autoComplete="off"
 				onSubmit={this.handleSubmit}>
-					<h1>Tittle <Link className="title ml-2" to = "/">Monti</Link> </h1>
+					<h1>Log to the <Link className="title ml-2" to = "/">App</Link> </h1>
 					<p className="lead">Fill in the form below to login to your account.</p>
 					<div className="form-group">
 						<input
