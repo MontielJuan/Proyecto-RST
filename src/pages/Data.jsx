@@ -68,8 +68,9 @@ const Data = () => {
               <div className="container mt-3">
                 <div className="row justify-content-center">
                   <div className="col-md-6"> 
-                  <h2>Dispositivos </h2>
-
+                  <h2>Dispositivos <button className="btn btn-primary" onClick={() => {cambiarEstado()}}>Refrescar</button></h2>
+                  <br></br>
+                  
                   <div>
                     <SelectCity data={data} setFilteredData={setFilteredData} cambiarEstado={cambiarEstado} />
                   </div>
