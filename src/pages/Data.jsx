@@ -8,6 +8,7 @@ import { SelectCity } from "../components/SelectCity";
 const Data = () => {
     const [data, setData] = useState();
     const [filteredData, setFilteredData] = useState([]);
+    const [mostrar, setMostrar] = useState(false)
 
     useEffect(() => {
       const dataRef = firebase.database().ref('users');
@@ -36,6 +37,11 @@ const Data = () => {
       }
     };
 
+    const handleRefresh = () => {
+      setMostrar(!mostrar)
+      cambiarEstado();
+    }
+
 
     return (
         <>     
@@ -48,19 +54,32 @@ const Data = () => {
           <button className="btn btn-dark mr-3" onClick={() => auth().signOut()}>Logout</button>            
         </nav>
 
+        <br></br>
 
-        <div className="container mt-3">
-          <div className="row justify-content-center">
-            <div className="col-md-6"> 
-            <h2>Dispositivos </h2>
+        <div className="container">
+        <div className="row justify-content-center">       
+        <button className="btn btn-warning" onClick={handleRefresh}>MostrarResultados</button>
+        </div> 
+        </div>
 
+        {
+          mostrar && (
             <div>
-              <SelectCity data={data} setFilteredData={setFilteredData} cambiarEstado={cambiarEstado} /><button className="mt-3 btn btn-outline-primary" onClick={() => {cambiarEstado()}}>Refresh</button>
+              <div className="container mt-3">
+                <div className="row justify-content-center">
+                  <div className="col-md-6"> 
+                  <h2>Dispositivos </h2>
+
+                  <div>
+                    <SelectCity data={data} setFilteredData={setFilteredData} cambiarEstado={cambiarEstado} />
+                  </div>
+                </div>          
+              </div>
+                <TablaGastos data = {filteredData} setFilteredData={setFilteredData} cambiarEstado={cambiarEstado}/>
+              </div>
             </div>
-          </div>          
-        </div>
-          <TablaGastos data = {filteredData} setFilteredData={setFilteredData}/>
-        </div>
+          )
+        }
     </>
     );
 }

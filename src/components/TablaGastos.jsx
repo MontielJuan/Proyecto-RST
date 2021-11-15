@@ -3,7 +3,7 @@ import {AiFillCheckCircle} from 'react-icons/ai'
 import {MdOutlineError} from 'react-icons/md'
 
 
-const TablaGastos = ({data}) => {
+const TablaGastos = ({data,cambiarEstado}) => {
 
     const renderIcon = (dato) => {
         if(dato.Estado === "ON"){
