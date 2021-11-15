@@ -1,47 +1,60 @@
-import React, { Component } from 'react'
-import firebase from "firebase/app";
-import "firebase/database";
-import {
-  FirebaseDatabaseProvider,
-  FirebaseDatabaseNode,
-} from "@react-firebase/database";
-import { firebaseConfig } from "../firebase";
-import ListaGastos from './ListaGastos'
+import React, { useEffect } from "react";
 
-class TablaGastos extends Component {
-    render() {
-        return (
-            <div className="row justify-content-center">
-            <div className="form-group col-md-20">
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>Estado</th>
-                            <th>Fecha</th>
-                            <th>N° Pauta</th>
-                            <th>Punto</th>
-                            <th>Detalles Pista</th>
-                            <th>Tiempo entre pautas</th>
 
-                            
-                        </tr>
-                    </thead>                                                        
-                    <FirebaseDatabaseProvider firebase={firebase} {...firebaseConfig}>
-                        <FirebaseDatabaseNode path="users/" limitToFirst={4} orderByValue={"fecha"}>
-                            {(data) => {
-                                const { value } = data;
-                                if (value === null || typeof value === "undefined") return null;                                
-                                const values = Object.values(value);
-                                console.log(values)
-                                return <ListaGastos items={values} />
-                            }}
-                        </FirebaseDatabaseNode>
-                    </FirebaseDatabaseProvider>
-                </table>
-            </div>
-            </div>
-        )
-    }
+
+const TablaGastos = ({data,setEstado,estado}) => {
+
+
+
+    useEffect(() => {
+        if(data !== undefined){
+            data.map(dato => {
+                if(dato.Estado === "OFF"){
+                    setEstado("OFF")
+                }
+    
+                return null
+            })
+        }
+    }, [data,setEstado])
+
+    return (
+        <div className="text-center ">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Estado</th>
+                        <th>Fecha</th>
+                        <th>N° Pauta</th>
+                        <th>Punto</th>
+                        <th>Detalles Pista</th>
+                        <th>Tiempo entre pautas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                { data && (
+                    data.map((dato) => {
+                        return(
+                            <tr key={dato.id}>
+                                <th>{estado}</th>
+                                <th>{dato.Fecha}</th>
+                                <th>{dato.NPauta}</th>
+                                <th>{dato.Punto}</th>
+                                <th>{dato.Reproduccion}</th>
+                                <th>{dato.TPautas}</th>
+                            </tr>
+                        )
+                        }
+                    )
+                )
+                }
+                
+                </tbody>
+            </table>
+            <br/>
+        </div>
+    );
 }
 
 export default TablaGastos;

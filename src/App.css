@@ -48,3 +48,26 @@
 .btn {
   margin-top: 10px;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Reggae+One&display=swap');
+
+table {
+	text-align: center;
+	line-height: 40px;
+	border-collapse: separate;
+	border-spacing: 0;
+	margin: 50px auto;
+	border-radius: .25rem;
+	padding: 35px;
+	width: 100%;
+  margin-bottom: 110px;
+}
+
+thead tr .tittleTable {
+	color: rgb(0, 0, 0);
+}
+
+tbody tr:hover {
+	background-color: #acacac;
+	cursor: default;
+}
