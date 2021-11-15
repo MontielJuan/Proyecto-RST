@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 
 export const SelectCity = ({data, setFilteredData}) => {
 
-    const [city, setCity] = useState("")
+    const [city, setCity] = useState("Open this select menu")
+
+    const [categorias, setCategorias] = useState([])
 
     const handleChange = (event) => {
         event.preventDefault()
@@ -10,10 +12,16 @@ export const SelectCity = ({data, setFilteredData}) => {
     }
 
     useEffect(() => {
-        if(data !== undefined) {
+        if(data !== undefined && city !== "Open this select menu") {
           setFilteredData(data.filter((dato) => dato.Ciudad === city))
         }
-      },[setFilteredData,city])
+
+        if(data !== undefined && city === "Open this select menu"){
+            setFilteredData(data)
+            setCategorias([ ...new Set(data.map((dato) => dato.Ciudad))]);
+        }
+
+      },[setFilteredData,city,data])
 
 
   return (
@@ -22,9 +30,9 @@ export const SelectCity = ({data, setFilteredData}) => {
             <select className="form-select">
             <option defaultValue>Open this select menu</option>
                 { data && (
-                    data.map((dato) => {
+                    categorias.map((dato) => {
                         return (
-                            <option key={dato.Ciudad}>{dato.Ciudad}</option>
+                            <option key={dato}>{dato}</option>
                         )
                     }))
                 }

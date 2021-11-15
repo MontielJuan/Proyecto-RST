@@ -1,22 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 
 
-const TablaGastos = ({data,setEstado,estado}) => {
+const TablaGastos = ({data}) => {
 
 
-
-    useEffect(() => {
-        if(data !== undefined){
-            data.map(dato => {
-                if(dato.Estado === "OFF"){
-                    setEstado("OFF")
-                }
-    
-                return null
-            })
-        }
-    }, [data,setEstado])
 
     return (
         <div className="text-center ">
@@ -27,7 +15,7 @@ const TablaGastos = ({data,setEstado,estado}) => {
                         <th>Fecha</th>
                         <th>N° Pauta</th>
                         <th>Punto</th>
-                        <th>Detalles Pista</th>
+                        <th>Detalles Pauta</th>
                         <th>Tiempo entre pautas</th>
                     </tr>
                 </thead>
@@ -37,7 +25,7 @@ const TablaGastos = ({data,setEstado,estado}) => {
                     data.map((dato) => {
                         return(
                             <tr key={dato.id}>
-                                <th>{estado}</th>
+                                <th>{dato.Estado}</th>
                                 <th>{dato.Fecha}</th>
                                 <th>{dato.NPauta}</th>
                                 <th>{dato.Punto}</th>
@@ -48,7 +36,7 @@ const TablaGastos = ({data,setEstado,estado}) => {
                         }
                     )
                 )
-                }
+                } 
                 
                 </tbody>
             </table>

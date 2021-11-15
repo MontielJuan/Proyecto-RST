@@ -6,20 +6,19 @@ import { SelectCity } from "../components/SelectCity";
 
 
 const Data = () => {
-
     const [data, setData] = useState();
-    const [estado, setEstado] = useState("OFF")
     const [filteredData, setFilteredData] = useState([]);
 
     useEffect(() => {
       const dataRef = firebase.database().ref('users');
       dataRef.on('value', (snapshot) => {
         const datas = snapshot.val();
-        const data = [];
+        const localData = [];
         for (let id in datas) {
-          data.push({ id, ...datas[id] });
+          localData.push({ id, ...datas[id] });
         }
-        setData(data);
+        setData(localData);
+
       });
     }, []);
 
@@ -37,33 +36,30 @@ const Data = () => {
       }
     };
 
+
     return (
         <>     
         <nav className="navbar navbar-expand-sm navbar-light">
-        <button className="btn btn-dark mr-3" onClick={() => auth().signOut()}>Logout</button>
-          <a className="p-2 navbar-brand" href="/" >
+        
+          <a className="p-2 navbar-brand" href="/data" >
                     
             Monitoreo de dispositivos
-          </a>            
+          </a>
+          <button className="btn btn-dark mr-3" onClick={() => auth().signOut()}>Logout</button>            
         </nav>
-
-        <div className="container mt-3">
-            <button className="mt-3 btn btn-outline-primary" onClick={() => {cambiarEstado()}}>Refresh</button>
-        </div>
-        
 
 
         <div className="container mt-3">
           <div className="row justify-content-center">
             <div className="col-md-6"> 
-            <h2>Dispositivos</h2>
+            <h2>Dispositivos </h2>
 
             <div>
-              <SelectCity data={data} setFilteredData={setFilteredData} />
+              <SelectCity data={data} setFilteredData={setFilteredData} /><button className="mt-3 btn btn-outline-primary" onClick={() => {cambiarEstado()}}>Refresh</button>
             </div>
           </div>          
         </div>
-          <TablaGastos data = {filteredData} estado={estado} setEstado={setEstado}/>
+          <TablaGastos data = {filteredData} setFilteredData={setFilteredData}/>
         </div>
     </>
     );
