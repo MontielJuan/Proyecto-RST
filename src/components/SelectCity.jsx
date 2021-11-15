@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export const SelectCity = ({data, setFilteredData}) => {
+export const SelectCity = ({data, setFilteredData, cambiarEstado}) => {
 
     const [city, setCity] = useState("Open this select menu")
 
@@ -9,6 +9,7 @@ export const SelectCity = ({data, setFilteredData}) => {
     const handleChange = (event) => {
         event.preventDefault()
         setCity(event.target.value)
+        cambiarEstado();
     }
 
     useEffect(() => {

@@ -55,7 +55,7 @@ const Data = () => {
             <h2>Dispositivos </h2>
 
             <div>
-              <SelectCity data={data} setFilteredData={setFilteredData} /><button className="mt-3 btn btn-outline-primary" onClick={() => {cambiarEstado()}}>Refresh</button>
+              <SelectCity data={data} setFilteredData={setFilteredData} cambiarEstado={cambiarEstado} /><button className="mt-3 btn btn-outline-primary" onClick={() => {cambiarEstado()}}>Refresh</button>
             </div>
           </div>          
         </div>

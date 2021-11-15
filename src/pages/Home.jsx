@@ -8,10 +8,10 @@ const HomePage = () => {
           <div>
             <section className="container text-center py-5">
               <div >
-                <h1 className="display-4">Welcome</h1>
+                <h1 className="display-4">Bienvenido</h1>
               </div>
               <div className="mt-4 ">
-                <Link className="btn btn-primary px-5 mr-3" to = "/login">Login to your Account</Link>
+                <Link className="btn btn-primary px-5 mr-3" to = "/login">Ingresar</Link>
               </div>
             </section>
           </div>

@@ -1,10 +1,19 @@
 import React from "react";
-
+import {AiFillCheckCircle} from 'react-icons/ai'
+import {MdOutlineError} from 'react-icons/md'
 
 
 const TablaGastos = ({data}) => {
 
+    const renderIcon = (dato) => {
+        if(dato.Estado === "ON"){
+            return <th><AiFillCheckCircle color="green" size="2em"/></th>
+        }
 
+        if(dato.Estado === "OFF"){
+            return <th><MdOutlineError color="red" size="2em"/></th>
+        }
+    }
 
     return (
         <div className="text-center ">
@@ -25,7 +34,7 @@ const TablaGastos = ({data}) => {
                     data.map((dato) => {
                         return(
                             <tr key={dato.id}>
-                                <th>{dato.Estado}</th>
+                                {renderIcon(dato)}
                                 <th>{dato.Fecha}</th>
                                 <th>{dato.NPauta}</th>
                                 <th>{dato.Punto}</th>
